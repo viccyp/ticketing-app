@@ -122,7 +122,7 @@ export default async function DashboardPage() {
                           <strong className="text-gray-300">Quantity:</strong> {purchase.quantity}
                         </p>
                         <p className="text-sm text-gray-400">
-                          <strong className="text-gray-300">Total:</strong> ${purchase.total_price.toFixed(2)}
+                          <strong className="text-gray-300">Total:</strong> £{purchase.total_price.toFixed(2)}
                         </p>
                       </div>
                       <div className="bg-gray-700/50 rounded-lg p-3 mb-4 border border-gray-600">

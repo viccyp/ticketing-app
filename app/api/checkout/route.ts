@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
       line_items: [
         {
           price_data: {
-            currency: 'usd',
+            currency: 'gbp',
             product_data: {
               name: `${event.title} - ${quantity} Ticket${quantity > 1 ? 's' : ''}`,
               description: `Event: ${event.title}\nDate: ${new Date(event.date).toLocaleDateString('en-GB')}\nLocation: ${event.location}`,

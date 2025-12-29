@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
+import LogoutButton from './LogoutButton'
 
 export default function UserMenu() {
   const [user, setUser] = useState<any>(null)
@@ -139,7 +140,7 @@ export default function UserMenu() {
             Account
           </Link>
           <span className="text-sm text-gray-600">|</span>
-          <span className="text-sm text-gray-400">{displayName}</span>
+          <LogoutButton />
         </div>
 
         {/* Mobile Menu Button */}
@@ -180,6 +181,11 @@ export default function UserMenu() {
               >
                 Account
               </Link>
+              <div className="px-4 py-2 border-t border-gray-700 mt-2">
+                <div className="flex justify-center">
+                  <LogoutButton />
+                </div>
+              </div>
             </div>
           </div>
         )}

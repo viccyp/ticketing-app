@@ -144,7 +144,7 @@ export async function POST(request: NextRequest) {
                   })}</p>
                   <p style="margin: 5px 0;"><strong>Location:</strong> ${event.location}</p>
                   <p style="margin: 5px 0;"><strong>Quantity:</strong> ${quantity}</p>
-                  <p style="margin: 5px 0;"><strong>Total Price:</strong> $${(event.price * quantity).toFixed(2)}</p>
+                  <p style="margin: 5px 0;"><strong>Total Price:</strong> £${(event.price * quantity).toFixed(2)}</p>
                   <p style="margin: 5px 0;"><strong>Confirmation Code:</strong> <span style="font-family: monospace; font-size: 18px; font-weight: bold; color: #ec4899;">${confirmationCode}</span></p>
                 </div>
                 

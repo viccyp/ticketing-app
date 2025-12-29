@@ -108,7 +108,7 @@ export default async function SuccessPage({
               })}</p>
               <p className="text-gray-300"><strong className="text-white">Location:</strong> {event.location}</p>
               <p className="text-gray-300"><strong className="text-white">Quantity:</strong> {purchase.quantity}</p>
-              <p className="text-gray-300"><strong className="text-white">Total:</strong> ${purchase.total_price.toFixed(2)}</p>
+              <p className="text-gray-300"><strong className="text-white">Total:</strong> £{purchase.total_price.toFixed(2)}</p>
               <div className="pt-2 border-t border-gray-600">
                 <p className="text-sm text-gray-400 mb-1">Confirmation Code</p>
                 <p className="text-2xl font-mono font-bold text-pink-400">{purchase.confirmation_code}</p>

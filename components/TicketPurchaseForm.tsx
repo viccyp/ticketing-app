@@ -128,7 +128,7 @@ export default function TicketPurchaseForm({ event }: TicketPurchaseFormProps) {
         <div className="bg-gray-700/50 rounded-lg p-4 mb-6 border border-gray-600">
           <div className="flex justify-between items-center">
             <span className="text-gray-300">Total</span>
-            <span className="text-3xl font-bold text-pink-400">${totalPrice.toFixed(2)}</span>
+            <span className="text-3xl font-bold text-pink-400">£{totalPrice.toFixed(2)}</span>
           </div>
         </div>
       </div>
