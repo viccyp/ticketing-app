@@ -1,7 +1,8 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import LogoutButton from '@/components/LogoutButton'
+import Logo from '@/components/Logo'
+import UserMenu from '@/components/UserMenu'
 
 async function getUserPurchases(userId: string) {
   const supabase = await createClient()
@@ -29,6 +30,22 @@ async function getUserPurchases(userId: string) {
   return data || []
 }
 
+async function getUserProfile(userId: string) {
+  const supabase = await createClient()
+  
+  const { data, error } = await supabase
+    .from('user_profiles')
+    .select('*')
+    .eq('id', userId)
+    .single()
+
+  if (error && error.code !== 'PGRST116') {
+    console.error('Error fetching profile:', error)
+  }
+
+  return data
+}
+
 export default async function DashboardPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -38,22 +55,15 @@ export default async function DashboardPage() {
   }
 
   const purchases = await getUserPurchases(user.id)
+  const profile = await getUserProfile(user.id)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
-      <header className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700 shadow-lg">
+      <header className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700 shadow-lg relative z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
-            <div>
-              <Link href="/" className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
-                Vic Valentine
-              </Link>
-              <p className="text-gray-400 mt-1">My Tickets</p>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-400">{user.email}</span>
-              <LogoutButton />
-            </div>
+            <Logo height={50} showTagline />
+            <UserMenu />
           </div>
         </div>
       </header>

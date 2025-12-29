@@ -15,12 +15,25 @@ export default function TicketPurchaseForm({ event }: TicketPurchaseFormProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  // Pre-fill email if user is logged in
+  // Pre-fill email and name if user is logged in
   useEffect(() => {
     const supabase = createClient()
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (user?.email) {
-        setEmail(user.email)
+    supabase.auth.getUser().then(async ({ data: { user } }) => {
+      if (user) {
+        if (user.email) {
+          setEmail(user.email)
+        }
+        
+        // Get user profile for name
+        const { data: profile } = await supabase
+          .from('user_profiles')
+          .select('full_name')
+          .eq('id', user.id)
+          .single()
+        
+        if (profile?.full_name) {
+          setName(profile.full_name)
+        }
       }
     })
   }, [])

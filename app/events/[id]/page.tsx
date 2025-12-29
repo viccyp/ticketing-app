@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import TicketPurchaseForm from '@/components/TicketPurchaseForm'
 import UserMenu from '@/components/UserMenu'
+import Logo from '@/components/Logo'
 
 async function getEvent(id: string) {
   const supabase = await createClient()
@@ -27,12 +28,10 @@ export default async function EventPage({ params }: { params: { id: string } }) 
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
-      <header className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700 shadow-lg">
+      <header className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700 shadow-lg relative z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
-            <a href="/" className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
-              Vic Valentine
-            </a>
+            <Logo height={50} showTagline />
             <UserMenu />
           </div>
         </div>

@@ -1,6 +1,8 @@
 import { createAdminClient } from '@/lib/supabase/admin'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import Logo from '@/components/Logo'
+import UserMenu from '@/components/UserMenu'
 
 async function getPurchaseDetails(sessionId: string) {
   const supabase = createAdminClient()
@@ -71,11 +73,12 @@ export default async function SuccessPage({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
-      <header className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700 shadow-lg">
+      <header className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700 shadow-lg relative z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <Link href="/" className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
-            Vic Valentine
-          </Link>
+          <div className="flex justify-between items-center">
+            <Logo height={50} showTagline />
+            <UserMenu />
+          </div>
         </div>
       </header>
 

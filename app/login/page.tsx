@@ -4,10 +4,12 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Logo from '@/components/Logo'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [fullName, setFullName] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [isSignUp, setIsSignUp] = useState(false)
@@ -27,12 +29,22 @@ export default function LoginPage() {
           password,
           options: {
             emailRedirectTo: `${window.location.origin}/dashboard`,
+            data: {
+              full_name: fullName,
+            },
           },
         })
 
         if (signUpError) throw signUpError
 
         if (data.user) {
+          // Create user profile
+          if (fullName) {
+            await supabase.from('user_profiles').upsert({
+              id: data.user.id,
+              full_name: fullName,
+            })
+          }
           router.push('/dashboard')
           router.refresh()
         }
@@ -61,9 +73,9 @@ export default function LoginPage() {
       <div className="max-w-md w-full">
         <div className="bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-2xl border border-gray-700 p-8">
           <div className="text-center mb-8">
-            <Link href="/" className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
-              Vic Valentine
-            </Link>
+            <div className="flex justify-center mb-4">
+              <Logo height={50} />
+            </div>
             <h2 className="text-2xl font-bold text-white mt-4">
               {isSignUp ? 'Create Account' : 'Sign In'}
             </h2>
@@ -73,6 +85,23 @@ export default function LoginPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            {isSignUp && (
+              <div>
+                <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-2">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  id="fullName"
+                  required={isSignUp}
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  className="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent placeholder-gray-500"
+                  placeholder="John Doe"
+                />
+              </div>
+            )}
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                 Email Address
