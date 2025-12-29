@@ -41,7 +41,7 @@
    STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret
    RESEND_API_KEY=re_your_resend_key
    RESEND_FROM_EMAIL=your_verified_email@domain.com
-   NEXT_PUBLIC_APP_URL=https://your-app.vercel.app
+   NEXT_PUBLIC_APP_URL=https://vicvalentine.com
    ```
    
    **Important:**

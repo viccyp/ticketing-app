@@ -68,7 +68,7 @@ RESEND_API_KEY=your_resend_api_key
 RESEND_FROM_EMAIL=noreply@yourdomain.com
 
 # App Configuration
-NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_APP_URL=https://vicvalentine.com
 ```
 
 ### 6. Update Database Schema
