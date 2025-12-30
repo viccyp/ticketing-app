@@ -45,8 +45,17 @@ export default function LoginPage() {
               full_name: fullName,
             })
           }
-          router.push('/dashboard')
-          router.refresh()
+          
+          // If session exists, user is logged in (email confirmation disabled)
+          if (data.session) {
+            await new Promise(resolve => setTimeout(resolve, 100))
+            window.location.href = '/dashboard'
+          } else {
+            // Email confirmation required - show message
+            setError(null)
+            setLoading(false)
+            alert('Please check your email to confirm your account before signing in.')
+          }
         }
       } else {
         const { data, error: signInError } = await supabase.auth.signInWithPassword({
@@ -56,9 +65,10 @@ export default function LoginPage() {
 
         if (signInError) throw signInError
 
-        if (data.user) {
-          router.push('/dashboard')
-          router.refresh()
+        if (data.session) {
+          // Wait a moment for cookies to be set
+          await new Promise(resolve => setTimeout(resolve, 100))
+          window.location.href = '/dashboard'
         }
       }
     } catch (err) {

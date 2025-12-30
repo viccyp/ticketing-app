@@ -56,10 +56,11 @@
 
 ## Step 3: Set Up Stripe Webhook for Production
 
-1. **In Stripe Dashboard:**
+1. **In Stripe Dashboard (Live mode):**
+   - Toggle to **"Live mode"** in the top right
    - Go to **Developers** → **Webhooks**
    - Click "Add endpoint"
-   - Enter your Vercel URL: `https://your-app.vercel.app/api/webhooks/stripe`
+   - Enter your production URL: `https://www.vicvalentine.com/api/webhooks/stripe`
    - Select event: `checkout.session.completed`
    - Click "Add endpoint"
    - Copy the **Signing secret** (starts with `whsec_`)
@@ -67,8 +68,11 @@
 
 2. **Update Vercel environment variables:**
    - Go back to Vercel → Settings → Environment Variables
+   - Update `STRIPE_SECRET_KEY` with your **live** key (starts with `sk_live_`)
    - Update `STRIPE_WEBHOOK_SECRET` with the production webhook secret
    - Redeploy your app
+
+**📖 For detailed instructions, see [SWITCH_TO_LIVE_STRIPE.md](./SWITCH_TO_LIVE_STRIPE.md)**
 
 ## Step 4: Update Database Schema (if needed)
 
