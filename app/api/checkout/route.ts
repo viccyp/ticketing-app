@@ -60,14 +60,7 @@ export async function POST(request: NextRequest) {
             currency: 'gbp',
             product_data: {
               name: `${event.title} - ${quantity} Ticket${quantity > 1 ? 's' : ''}`,
-              description: `${event.description || event.title}\n\nDate: ${new Date(event.date).toLocaleDateString('en-GB', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-              })}\nLocation: ${event.location}`,
+              description: `Event: ${event.title}\nDate: ${new Date(event.date).toLocaleDateString('en-GB')}\nLocation: ${event.location}`,
               images: event.image_url ? [event.image_url] : undefined,
             },
             unit_amount: Math.round(event.price * 100), // Convert to cents
