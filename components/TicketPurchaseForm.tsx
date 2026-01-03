@@ -128,7 +128,7 @@ export default function TicketPurchaseForm({ event }: TicketPurchaseFormProps) {
         <div className="bg-gray-700/50 rounded-lg p-4 mb-6 border border-gray-600">
           <div className="flex justify-between items-center">
             <span className="text-gray-300">Total</span>
-            <span className="text-3xl font-bold text-pink-400">£{totalPrice.toFixed(2)}</span>
+            <span className="text-3xl font-bold text-purple-400">£{totalPrice.toFixed(2)}</span>
           </div>
         </div>
       </div>
@@ -144,7 +144,7 @@ export default function TicketPurchaseForm({ event }: TicketPurchaseFormProps) {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent placeholder-gray-500"
+                  className="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
             placeholder="John Doe"
           />
         </div>
@@ -158,7 +158,7 @@ export default function TicketPurchaseForm({ event }: TicketPurchaseFormProps) {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent placeholder-gray-500"
+                  className="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
             placeholder="john@example.com"
           />
         </div>
@@ -182,7 +182,7 @@ export default function TicketPurchaseForm({ event }: TicketPurchaseFormProps) {
         <button
           type="submit"
           disabled={loading}
-          className="w-full px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
+          className="w-full px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
         >
           {loading ? 'Processing...' : `Purchase ${quantity} Ticket${quantity > 1 ? 's' : ''}`}
         </button>

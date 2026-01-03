@@ -44,7 +44,7 @@ export default function EventSearch({ events, onSearch }: EventSearchProps) {
           value={searchQuery}
           onChange={(e) => handleSearch(e.target.value)}
           placeholder="Search events by name, description, or location..."
-          className="w-full pl-12 pr-4 py-3 bg-gray-800/80 border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent placeholder-gray-500"
+          className="w-full pl-12 pr-4 py-3 bg-gray-800/80 border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
         />
         {searchQuery && (
           <button
@@ -60,4 +60,5 @@ export default function EventSearch({ events, onSearch }: EventSearchProps) {
     </div>
   )
 }
+
 

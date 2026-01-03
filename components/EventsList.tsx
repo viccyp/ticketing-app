@@ -47,7 +47,7 @@ export default function EventsList({ initialEvents }: EventsListProps) {
                     <p className="text-sm text-gray-400">{event.location}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl font-bold text-pink-400">£{event.price}</p>
+                    <p className="text-2xl font-bold text-purple-400">£{event.price}</p>
                     <p className="text-xs text-gray-500">
                       {event.available_tickets} tickets left
                     </p>

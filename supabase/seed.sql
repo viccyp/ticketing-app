@@ -32,3 +32,6 @@ INSERT INTO events (title, description, date, location, price, total_tickets, av
 
 
 
+
+
+

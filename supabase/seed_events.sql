@@ -30,7 +30,21 @@ VALUES (
 )
 ON CONFLICT DO NOTHING;
 
--- Event 3: Indie Night at The Roundhouse (2.5 months from now)
+-- Event 3: Peach Club Live (1.5 months from now)
+INSERT INTO events (title, description, date, location, image_url, price, total_tickets, available_tickets)
+VALUES (
+  'Peach Club Live',
+  'Don''t miss the electrifying feminist punk band from Norwich! Peach Club brings their raw energy and powerful anthems to London for an unforgettable night. Known for their fierce performances and empowering lyrics, this is a show you won''t want to miss. Join us for an evening of punk rock, passion, and pure energy!',
+  NOW() + INTERVAL '45 days',
+  'The Garage, London',
+  'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=600&fit=crop',
+  12.00,
+  300,
+  300
+)
+ON CONFLICT DO NOTHING;
+
+-- Event 4: Indie Night at The Roundhouse (2.5 months from now)
 INSERT INTO events (title, description, date, location, image_url, price, total_tickets, available_tickets)
 VALUES (
   'Indie Night: Emerging Artists Showcase',

@@ -41,7 +41,7 @@ export default async function SuccessPage({
           <p className="text-gray-400 mb-6">No session ID provided.</p>
           <Link
             href="/"
-            className="inline-block px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+            className="inline-block px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
           >
             Return Home
           </Link>
@@ -60,7 +60,7 @@ export default async function SuccessPage({
           <p className="text-gray-400 mb-6">Your payment is being processed. You will receive a confirmation email shortly.</p>
           <Link
             href="/"
-            className="inline-block px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+            className="inline-block px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
           >
             Return Home
           </Link>
@@ -111,14 +111,14 @@ export default async function SuccessPage({
               <p className="text-gray-300"><strong className="text-white">Total:</strong> £{purchase.total_price.toFixed(2)}</p>
               <div className="pt-2 border-t border-gray-600">
                 <p className="text-sm text-gray-400 mb-1">Confirmation Code</p>
-                <p className="text-2xl font-mono font-bold text-pink-400">{purchase.confirmation_code}</p>
+                <p className="text-2xl font-mono font-bold text-purple-400">{purchase.confirmation_code}</p>
               </div>
             </div>
           </div>
 
           <Link
             href="/"
-            className="inline-block px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+            className="inline-block px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
           >
             Browse More Events
           </Link>

@@ -122,3 +122,6 @@ Once set up:
 - Resend Docs: [https://resend.com/docs](https://resend.com/docs)
 - Resend Support: support@resend.com
 
+
+
+

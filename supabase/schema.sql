@@ -94,3 +94,6 @@ CREATE POLICY "Anyone can create purchases" ON purchases
 
 
 
+
+
+

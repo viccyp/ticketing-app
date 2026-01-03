@@ -50,3 +50,6 @@ After adding the events, when you visit your website at `http://localhost:3000`,
 - This is fine - the `ON CONFLICT DO NOTHING` clause prevents errors
 - You can delete existing events from Table Editor if you want to re-add them
 
+
+
+

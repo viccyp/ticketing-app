@@ -19,9 +19,6 @@ export default function Logo({ className = '', height = 50, showTagline = false 
             style={{ width: 'auto' }}
           />
         </Link>
-        {showTagline && (
-          <p className="text-gray-400 mt-1 md:mt-2 text-xs md:text-sm" style={{ paddingLeft: '0.5rem' }}>presents...</p>
-        )}
       </div>
     </div>
   )

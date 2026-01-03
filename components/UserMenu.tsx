@@ -13,53 +13,45 @@ export default function UserMenu() {
 
   useEffect(() => {
     let mounted = true
-    let timeoutId: NodeJS.Timeout
     let subscription: { unsubscribe: () => void } | null = null
     
     const init = async () => {
       try {
         const supabase = createClient()
         
-        // Set timeout to prevent infinite loading (longer timeout)
-        timeoutId = setTimeout(() => {
-          if (mounted) {
-            console.warn('UserMenu timeout - showing sign in')
-            setLoading(false)
-          }
-        }, 5000)
-        
-        // Get initial session
-        const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+        // Use getUser() instead of getSession() for more reliable auth state
+        const { data: { user }, error: userError } = await supabase.auth.getUser()
         
         if (!mounted) return
         
-        if (sessionError) {
-          console.error('Session error:', sessionError)
+        if (userError) {
+          console.error('User error:', userError)
+          setUser(null)
+          setLoading(false)
+          return
         }
         
-        // Set user from session
-        if (session?.user) {
-          setUser(session.user)
+        // Set user from auth state
+        if (user) {
+          setUser(user)
           
-          // Fetch profile
-          try {
-            const { data: profile } = await supabase
-              .from('user_profiles')
-              .select('full_name')
-              .eq('id', session.user.id)
-              .single()
-            
-            if (mounted) {
-              setUserName(profile?.full_name || null)
-            }
-          } catch (err) {
-            console.error('Profile fetch error:', err)
-          }
+          // Fetch profile (non-blocking)
+          supabase
+            .from('user_profiles')
+            .select('full_name')
+            .eq('id', user.id)
+            .single()
+            .then(({ data: profile }) => {
+              if (mounted) {
+                setUserName(profile?.full_name || null)
+              }
+            })
+            .catch((err) => {
+              console.error('Profile fetch error:', err)
+            })
         } else {
           setUser(null)
         }
-        
-        clearTimeout(timeoutId)
         
         if (mounted) {
           setLoading(false)
@@ -69,14 +61,15 @@ export default function UserMenu() {
         const { data: { subscription: authSubscription } } = supabase.auth.onAuthStateChange(async (event, newSession) => {
           if (!mounted) return
           
-          setUser(newSession?.user ?? null)
+          const newUser = newSession?.user ?? null
+          setUser(newUser)
           
-          if (newSession?.user) {
+          if (newUser) {
             try {
               const { data: profile } = await supabase
                 .from('user_profiles')
                 .select('full_name')
-                .eq('id', newSession.user.id)
+                .eq('id', newUser.id)
                 .single()
               
               if (mounted) {
@@ -93,8 +86,8 @@ export default function UserMenu() {
         subscription = authSubscription
       } catch (err) {
         console.error('UserMenu init error:', err)
-        clearTimeout(timeoutId)
         if (mounted) {
+          setUser(null)
           setLoading(false)
         }
       }
@@ -104,7 +97,6 @@ export default function UserMenu() {
     
     return () => {
       mounted = false
-      if (timeoutId) clearTimeout(timeoutId)
       if (subscription) subscription.unsubscribe()
     }
   }, [])
@@ -128,14 +120,14 @@ export default function UserMenu() {
         <div className="hidden md:flex items-center gap-4">
           <Link
             href="/dashboard"
-            className="text-sm text-gray-300 hover:text-pink-400 transition-colors"
+            className="text-sm text-gray-300 hover:text-purple-400 transition-colors"
           >
             My Tickets
           </Link>
           <span className="text-sm text-gray-600">|</span>
           <Link
             href="/account"
-            className="text-sm text-gray-300 hover:text-pink-400 transition-colors"
+            className="text-sm text-gray-300 hover:text-purple-400 transition-colors"
           >
             Account
           </Link>
@@ -146,7 +138,7 @@ export default function UserMenu() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden flex items-center gap-2 text-gray-300 hover:text-pink-400 transition-colors px-2 py-1"
+          className="md:hidden flex items-center gap-2 text-gray-300 hover:text-purple-400 transition-colors px-2 py-1"
           aria-label="Menu"
         >
           <svg
@@ -170,14 +162,14 @@ export default function UserMenu() {
               <Link
                 href="/dashboard"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-pink-400 transition-colors"
+                className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-purple-400 transition-colors"
               >
                 My Tickets
               </Link>
               <Link
                 href="/account"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-pink-400 transition-colors"
+                className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-purple-400 transition-colors"
               >
                 Account
               </Link>
@@ -197,7 +189,7 @@ export default function UserMenu() {
   return (
     <Link
       href="/login"
-      className="px-4 py-2 text-sm bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+      className="px-4 py-2 text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
     >
       Sign In
     </Link>

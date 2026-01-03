@@ -80,7 +80,7 @@ export default async function DashboardPage() {
             <p className="text-gray-400 mb-6">You haven't purchased any tickets yet.</p>
             <Link
               href="/"
-              className="inline-block px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+              className="inline-block px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
             >
               Browse Events
             </Link>
@@ -127,7 +127,7 @@ export default async function DashboardPage() {
                       </div>
                       <div className="bg-gray-700/50 rounded-lg p-3 mb-4 border border-gray-600">
                         <p className="text-xs text-gray-400 mb-1">Confirmation Code</p>
-                        <p className="text-lg font-mono font-bold text-pink-400">{purchase.confirmation_code}</p>
+                        <p className="text-lg font-mono font-bold text-purple-400">{purchase.confirmation_code}</p>
                       </div>
                       <p className="text-xs text-gray-500">
                         Purchased: {new Date(purchase.created_at).toLocaleDateString('en-GB')}
